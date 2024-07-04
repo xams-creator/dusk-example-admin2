@@ -1,0 +1,109 @@
+.xams-navigation-tree {
+    .ant-tree {
+        font-weight: 500;
+        color: #3f4254;
+
+        // indent 后面的元素
+        .ant-tree-switcher {
+            line-height: 38px;
+        }
+
+        .ant-tree-switcher-noop:before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            content: '';
+            //background-color: red;
+            border-radius: 50%;
+            //transform: translate(-50%, -50%);
+        }
+
+        .ant-tree-treenode {
+            align-items: center;
+            padding: 2px 0 2px 4px;
+            width: 100%;
+
+            .ant-tree-node-content-wrapper {
+                display: flex;
+                align-items: center;
+                min-width: 0;
+                padding-left: 0;
+                line-height: 38px;
+                width: 100%;
+
+                &:hover {
+                    background: none;
+                }
+
+                .ant-tree-iconEle {
+                    display: flex;
+                    flex-shrink: 0;
+                    align-items: center;
+                    justify-content: center;
+                    //color: ${p => p.theme.textColorDisabled};
+                }
+
+                .ant-tree-title {
+                    flex: 1;
+                    //padding: 0 0 0 ${SPACE};
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                &.ant-tree-node-selected {
+                    font-weight: 500;
+                    color: var(--ant-primary-color, var(--app-primary-color)) !important;
+                    background: none;
+                }
+            }
+
+            &:hover {
+                color: var(--ant-primary-color, var(--app-primary-color));
+
+                .ant-tree-node-content-wrapper {
+                    .ant-tree-iconEle {
+                        color: var(--ant-primary-color, var(--app-primary-color));
+                    }
+                }
+            }
+        }
+
+        .ant-tree-treenode-selected {
+            background-color: rgb(245, 248, 250);
+
+            .ant-tree-switcher {
+                color: var(--ant-primary-color, var(--app-primary-color)) !important;
+            }
+
+            &.ant-tree-treenode {
+                .ant-tree-node-content-wrapper {
+                    .ant-tree-iconEle {
+                        color: var(--ant-primary-color, var(--app-primary-color));
+                    }
+                }
+            }
+        }
+
+        .ant-tree-checkbox {
+            margin-top: 0;
+        }
+    }
+
+    .ant-empty-img-default {
+        width: 100%;
+    }
+
+    // 隐藏拖拽图标
+    .ant-tree .ant-tree-treenode-draggable .ant-tree-draggable-icon {
+        display: none;
+    }
+
+    .ant-tree.ant-tree-directory .ant-tree-treenode-selected:before,
+    .ant-tree.ant-tree-directory .ant-tree-treenode-selected:hover:before {
+        //background: var(--ant-primary-color);
+        background: rgb(245, 248, 250);
+    }
+}
