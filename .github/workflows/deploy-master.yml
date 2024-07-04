@@ -20,9 +20,8 @@ jobs:
 
             -   name: Copy 404 Page
                 run: |
-                    sleep 5
-                    ls
                     pwd
+                    cd ./packages/dusk-example-admin
                     cp ./build/index.html ./build/404.html
 
             -   name: Deploy
@@ -30,4 +29,4 @@ jobs:
                 with:
                     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                     BRANCH: gh-pages
-                    FOLDER: build
+                    FOLDER: ./packages/dusk-example-admin/build
