@@ -1,9 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
+import { useDispatch, useStore } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { useDispatch, useNamespacedSelector, useStore } from '@xams-framework/dusk';
+import { useNamespacedSelector } from '@xams-framework/dusk';
 import { Alert, Dropdown, Tabs, TabsProps } from 'antd';
-import { cloneDeep } from 'lodash';
+import { Tab } from 'rc-tabs/es/interface';
 
 import model, { WorkspaceState } from '@/business/inject/models/workspace.model';
 
@@ -17,7 +18,7 @@ interface WorkspaceProps extends TabsProps {
 export default function Workspace({ render, onChange, ...props }: WorkspaceProps) {
     const { change, close, reload, panes, activeKey, closeAll, closeOther } = useWorkspaceService();
 
-    const items: TabsProps['items'] = useMemo(() => {
+    const items: Tab[] = useMemo(() => {
         return (panes || []).map(pane => {
             return {
                 key: pane.key,
@@ -108,13 +109,9 @@ export default function Workspace({ render, onChange, ...props }: WorkspaceProps
 }
 
 export function useWorkspaceService() {
-    // const {
-    let addLocationSearch = false,
-        // } = options;
-        navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const state: WorkspaceState = useNamespacedSelector(model.namespace);
-    const { panes, activeKey } = state;
+    const { panes, activeKey }: WorkspaceState = useNamespacedSelector(model.namespace);
     const store = useStore();
 
     const getState = useCallback((): WorkspaceState => {
@@ -133,35 +130,27 @@ export function useWorkspaceService() {
 
     const change = useCallback(
         pane => {
-            const { key, path } = pane;
+            const { key } = pane;
             const state = getState();
             if (exist(key) && state.activeKey !== key) {
                 dispatch(model.actions.change(key));
-                let to = path || key;
-                if (addLocationSearch) {
-                    to += location.search;
-                }
-                navigate(to, { replace: true });
+                navigate(key, { replace: true });
             }
         },
-        [getState, exist, navigate, dispatch, addLocationSearch]
+        [getState, exist, navigate, dispatch]
     );
 
     const open = useCallback(
         pane => {
-            const { key, path } = pane;
+            const { key } = pane;
             if (!exist(key)) {
-                dispatch(model.actions.open(cloneDeep(pane)));
-                let to = path || key;
-                if (addLocationSearch) {
-                    to += location.search;
-                }
-                navigate(to, { replace: true });
+                dispatch(model.actions.open(pane));
+                navigate(key + location.search, { replace: true });
             } else {
                 change(pane);
             }
         },
-        [exist, navigate, dispatch, change, addLocationSearch]
+        [exist, navigate, dispatch, change]
     );
 
     const select = useCallback(

@@ -10,6 +10,9 @@
     "dependencies": {
         "@xams-framework/dusk": "2.0.0",
         "@xams-framework/dusk-plugin-context-webpack": "0.0.1",
+        "@xams-framework/dusk-plugin-hmr": "^1.1.3",
+        "@xams-framework/dusk-plugin-loading": "^1.0.2",
+        "@ant-design/pro-layout": "^7.19.8",
         "lodash": "^4.17.21",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",

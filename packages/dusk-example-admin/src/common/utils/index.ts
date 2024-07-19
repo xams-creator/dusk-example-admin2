@@ -58,13 +58,12 @@ export function resize(delay: number | null = null) {
 }
 
 // 列表转树函数
-export function listToTree(list: any[] = [], parentId: null | string = '0', cb?: (node) => void) {
+export function listToTree(list: any[] = [], parentId: null | string = '0') {
     return list
         .filter(item => item.parentId === parentId)
         .map(item => {
-            const node = { ...item, children: listToTree(list, item.id, cb) };
+            const node = { ...item, children: listToTree(list, item.id) };
             if (!node.children.length) delete node.children; // 如果没有子节点，则不包含 children 属性
-            cb?.(node);
             return node;
         });
 }

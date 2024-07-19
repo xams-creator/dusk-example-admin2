@@ -1,0 +1,273 @@
+.app-layout {
+    width: 100%;
+    height: 100%;
+
+    .app-layout-header {
+        background: white;
+        height: 48px;
+        line-height: 48px;
+        padding: 0;
+        position: relative;
+        width: 100%;
+        box-shadow: 0 3px 5px 0 rgba(38, 38, 38, 0.1);
+    }
+
+    //.app-layout-content {
+    //    overflow: auto;
+    //    padding: 16px 24px;
+    //    background: linear-gradient(to right bottom, #ddd6f3, #faaca8);
+    //    height: auto;
+    //}
+
+    .app-layout-content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+//
+//.wso {
+//    width: inherit;
+//    height: 100%; // || auto ,inherit
+//    padding: 12px;
+//    box-sizing: border-box;
+//    background: white; // || #e6e6e6,white
+//    overflow-y: auto;
+//    scroll-behavior: smooth;
+//
+//    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+//        width: 100px;
+//        text-align: center;
+//    }
+//}
+//
+//.xams-body {
+//    width: 90%;
+//    z-index: 30;
+//    height: calc(100% - 70px);
+//    margin: -50px auto 0;
+//    background-color: #fff;
+//    border: 0;
+//    padding: 0;
+//    text-align: left;
+//    overflow: hidden;
+//
+//    & > .ant-tabs {
+//        width: 100%;
+//        height: 100%;
+//        overflow-y: auto;
+//    }
+//
+//    .ant-tabs-bar {
+//        margin: 0;
+//    }
+//
+//    .ant-tabs-content-holder {
+//        overflow-x: hidden;
+//        overflow-y: auto;
+//
+//        .ant-tabs-content {
+//            height: 100%;
+//        }
+//    }
+//}
+//
+//.xams-body-scrolled {
+//    & > .ant-tabs {
+//        height: 100%;
+//        overflow-y: hidden;
+//
+//        .ant-tabs-top-content,
+//        .ant-tabs-bottom-content,
+//        .ant-tabs-card-content {
+//            width: 100%;
+//            overflow: auto;
+//            height: 95%;
+//        }
+//    }
+//
+//    .wso {
+//        width: inherit;
+//        //height: unset;
+//        height: inherit;
+//        padding: 12px;
+//        box-sizing: border-box;
+//        background: white;
+//        overflow-y: auto;
+//    }
+//}
+//
+//.ant-tabs-top > .ant-tabs-nav,
+//.ant-tabs-bottom > .ant-tabs-nav,
+//.ant-tabs-top > div > .ant-tabs-nav,
+//.ant-tabs-bottom > div > .ant-tabs-nav {
+//    margin: 0;
+//    //margin: 0 0 12px 0
+//}
+//
+//.xams {
+//    .wsoRootPane {
+//        width: 100%;
+//        height: 100%;
+//        background: #e6e6e6; // || white ,#e6e6e6
+//        padding: 12px;
+//        //padding-right: 9px;   // || 当 滚动条出现时
+//        box-sizing: border-box;
+//        /*overflow-y: auto;*/
+//        overflow: hidden;
+//    }
+//}
+//
+//.xams-field-h1 {
+//    border-left: 6px solid var(--ant-primary-color, var(--app-primary-color));
+//    padding-left: 20px;
+//    margin-bottom: 20px;
+//}
+//
+//.xams-body {
+//    //box-shadow: 0 2px 8px 0 rgb(0 0 0 / 37%);
+//    box-shadow: 0 2px 6px rgb(0 0 0 / 37%);
+//    border-radius: 8px;
+//}
+//
+//.xams-navigation {
+//    border-radius: 0 8px 8px 0;
+//}
+//
+//.wso > .ant-alert-error {
+//    border: 0;
+//    background: transparent;
+//}
+//
+//.cbt-bi-tree.ant-tree {
+//    font-weight: 500;
+//    color: #3f4254;
+//
+//    // indent 后面的元素
+//    .ant-tree-switcher {
+//        line-height: 38px;
+//    }
+//
+//    .ant-tree-switcher-noop:before {
+//        position: absolute;
+//        top: 50%;
+//        left: 50%;
+//        width: 4px;
+//        height: 4px;
+//        content: '';
+//        //background-color: red;
+//        border-radius: 50%;
+//        //transform: translate(-50%, -50%);
+//    }
+//
+//    .ant-tree-treenode {
+//        align-items: center;
+//        padding: 2px 0 2px 4px;
+//        width: 100%;
+//
+//        .ant-tree-node-content-wrapper {
+//            display: flex;
+//            align-items: center;
+//            min-width: 0;
+//            padding-left: 0;
+//            line-height: 38px;
+//            width: 100%;
+//
+//            &:hover {
+//                background: none;
+//            }
+//
+//            .ant-tree-iconEle {
+//                display: flex;
+//                flex-shrink: 0;
+//                align-items: center;
+//                justify-content: center;
+//
+//                color: #666;
+//            }
+//
+//            .ant-tree-title {
+//                flex: 1;
+//                //padding: 0 0 0 ${SPACE};
+//                overflow: hidden;
+//                text-overflow: ellipsis;
+//                white-space: nowrap;
+//            }
+//
+//            &.ant-tree-node-selected {
+//                font-weight: 500;
+//                color: var(--app-primary-color);
+//                background: none;
+//            }
+//        }
+//
+//        &:hover {
+//            color: var(--app-primary-color);
+//
+//            .ant-tree-node-content-wrapper {
+//                .ant-tree-iconEle {
+//                    color: var(--app-primary-color);
+//                }
+//            }
+//        }
+//    }
+//
+//    .ant-tree-treenode-selected {
+//        background-color: rgb(245, 248, 250);
+//        color: var(--app-primary-color);
+//
+//        .ant-tree-switcher {
+//            color: var(--app-primary-color);
+//        }
+//
+//        &.ant-tree-treenode {
+//            .ant-tree-node-content-wrapper {
+//                .ant-tree-iconEle {
+//                    color: var(--app-primary-color);
+//                }
+//            }
+//        }
+//    }
+//
+//    //.ant-tree-checkbox {
+//    //    margin-top: 8px;
+//    //}
+//
+//    // 隐藏拖拽图标
+//    .ant-tree-treenode-draggable .ant-tree-draggable-icon {
+//        display: none;
+//    }
+//
+//    // 目录和菜单之间的间隙设置为 0, 默认是 4
+//    &.ant-tree-directory .ant-tree-treenode:before {
+//        bottom: 0;
+//    }
+//
+//    &.ant-tree-directory .ant-tree-treenode-selected:before,
+//    &.ant-tree-directory .ant-tree-treenode-selected:hover:before {
+//        background: rgb(245, 248, 250);
+//    }
+//}
+//
+//.test-table {
+//    height: 100%;
+//
+//    .ant-table-wrapper {
+//        height: 100%;
+//    }
+//
+//    .ant-space-item:nth-child(1) {
+//        flex-grow: 0;
+//    }
+//
+//    .ant-space-item:nth-child(2) {
+//        flex-grow: 1;
+//    }
+//}
+//
+//.wso-example {
+//    height: 100%;
+//    .ant-alert {
+//        height: inherit;
+//    }
+//}

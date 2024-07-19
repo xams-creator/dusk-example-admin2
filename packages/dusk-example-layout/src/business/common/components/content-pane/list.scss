@@ -1,0 +1,47 @@
+.app-page-list {
+    padding: 0px;
+    height: 100%;
+    overflow-y: auto;
+    //overflow-y: hidden;
+    .ant-spin-nested-loading {
+        height: 100%;
+
+        .ant-spin-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ant-row {
+            height: auto;
+        }
+    }
+}
+
+.app-page-list-adaptive {
+    .ant-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .ant-card-head {
+            flex-shrink: 0;
+        }
+
+        .ant-card-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 8px 8px 0 8px;
+        }
+    }
+
+    .ant-spin-nested-loading > div > .ant-spin {
+        max-height: 100%;
+    }
+
+    .ant-table-wrapper {
+        flex-grow: 1;
+    }
+}

@@ -20,13 +20,7 @@ body,
 }
 
 body {
-    font-family:
-        Roboto,
-        Helvetica Neue,
-        PingFang SC,
-        Hiragino Sans GB,
-        Microsoft YaHei,
-        sans-serif !important;
+    font-family: Roboto, Helvetica Neue, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif !important;
     line-height: 20px;
     overflow: hidden;
 }
@@ -52,13 +46,62 @@ input::-webkit-inner-spin-button {
 //    color: #fff
 //}
 
+*:fullscreen,
+*:-webkit-full-screen,
+*:-moz-full-screen {
+    background-color: #eee;
+}
+
+/* 滚动条优化 start */
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }
 
-*:fullscreen,
-*:-webkit-full-screen,
-*:-moz-full-screen {
-    background-color: #eee;
+::-webkit-scrollbar-track {
+    background: #f6f6f6;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cdcdcd;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #747474;
+}
+
+::-webkit-scrollbar-corner {
+    background: #f6f6f6;
+}
+
+/* 滚动条优化 end */
+.scrollbar-none {
+    /* 滚动条优化 start */
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+}
+*:focus-visible {
+    outline: transparent !important;
 }

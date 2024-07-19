@@ -265,11 +265,9 @@
     }
 }
 
-/** micro-app */
-.ant-tabs-top > .ant-tabs-nav,
-.ant-tabs-bottom > .ant-tabs-nav,
-.ant-tabs-top > div > .ant-tabs-nav,
-.ant-tabs-bottom > div > .ant-tabs-nav {
-    margin: 0 !important;
-    //margin: 0 0 12px 0
+.wso-example {
+    height: 100%;
+    .ant-alert {
+        height: inherit;
+    }
 }

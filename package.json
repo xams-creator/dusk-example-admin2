@@ -6,6 +6,7 @@
         "start:admin": "lerna run start --scope @dusk-example-admin2/dusk-example-admin  --parallel",
         "start:router": "lerna run start --scope @dusk-example-admin2/dusk-example-router  --parallel",
         "build:router": "lerna run build --scope @dusk-example-admin2/dusk-example-router  --parallel",
+        "start:layout": "lerna run start --scope @dusk-example-admin2/dusk-example-layout",
         "start:all": "lerna run start --scope @dusk-example-admin2/dusk-example-router --scope @dusk-example-admin2/dusk-example-hash-app --scope @dusk-example-admin2/dusk-example-browser-app  --parallel",
         "jest": "jest",
         "prettier": "prettier --write .",

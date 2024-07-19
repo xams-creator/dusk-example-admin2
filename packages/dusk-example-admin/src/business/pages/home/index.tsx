@@ -1,17 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { ClearOutlined, FolderFilled, FolderOpenFilled, SettingOutlined } from '@ant-design/icons';
-import { useNavigate } from '@xams-framework/dusk';
-import { useReactive } from 'ahooks';
-import { Layout, Spin } from 'antd';
+import { useDusk } from '@xams-framework/dusk';
+import { useCreation, useReactive } from 'ahooks';
+import { Layout } from 'antd';
+import { isEmpty } from 'lodash';
 
 import NavigationBar from '@/business/pages/home/components/navigation-bar';
 import Workspace, { useWorkspaceService } from '@/business/pages/home/components/workspace';
 import { listToTree } from '@/common/utils';
+import { DynamicComponent } from '@/examples/dynamic-component/dusk-plugin-dynamic-component';
+import { useViewModel } from '@/examples/use-data-model';
 
 import Header from './components/header';
-import { data } from './data';
 import './index.scss';
 
 export default function HomeContainer() {
@@ -19,21 +20,6 @@ export default function HomeContainer() {
     const state = useReactive({
         activeKey,
     });
-    // const navigate = useNavigate();
-    // const defaultSelectedKeys = useSegmentedLocationPathNames();
-
-    const treeData = useMemo(() => {
-        return listToTree(
-            data.map(item => {
-                const key = `${item.id}`;
-                return {
-                    ...item,
-                    key,
-                    navigation: item,
-                };
-            })
-        );
-    }, []);
     return (
         <Layout className={'app-layout'} style={{ background: 'linear-gradient(to right bottom, #ddd6f3, #faaca8)' }}>
             <Layout.Header className={'app-layout-header'} style={{ height: 106, lineHeight: 106 }}>
@@ -73,7 +59,16 @@ export default function HomeContainer() {
             <NavigationBar.Tree
                 tree={{
                     selectedKeys: [activeKey as string],
-                    treeData,
+                    treeData: listToTree(
+                        data.map(item => {
+                            const key = `${item.tid}/${item.oid}/${item.id}`;
+                            return {
+                                ...item,
+                                key,
+                                navigation: item,
+                            };
+                        })
+                    ),
                     fieldNames: { key: 'key', title: 'name' },
                     icon: (props: any) => {
                         if (props.isLeaf) {
@@ -88,38 +83,12 @@ export default function HomeContainer() {
                         state.activeKey = node.key as string;
                     },
                 }}
-                // menu={{
-                //     selectedKeys: [defaultSelectedKeys.at(-1) || ''],
-                //     items: [
-                //         {
-                //             key: 'apps',
-                //             label: '应用管理',
-                //             children: apps,
-                //         },
-                //     ],
-                //     onClick(node: any) {
-                //         console.log(node);
-                //         open({
-                //             key: node.key,
-                //             name: node.label || '组织',
-                //             isLeaf: true,
-                //             tid: 'ttx.wso.bill',
-                //             oid: 'organization',
-                //         });
-                //     },
-                // }}
             />
             <Layout.Content className={'app-layout-content'} style={{ padding: 0, top: 106 }}>
-                {/*<div className={'xams-body-scrolled bi-workspace xams-body'}>*/}
-                {/*    <Outlet />*/}
-                {/*</div>*/}
                 <Workspace
                     className={'xams-body-scrolled'}
                     render={pane => {
-                        const navigation = pane.navigation;
-                        if (!navigation.micro) {
-                            return <Outlet />;
-                        }
+                        return <VMDynamicComponent navigation={pane.navigation} />;
                     }}
                 />
             </Layout.Content>
@@ -127,30 +96,121 @@ export default function HomeContainer() {
     );
 }
 
-function useSegmentedLocationPathNames() {
-    const location = useLocation();
-    const [defaultSelectedKeys, setDefaultSelectedKeys] = useState(['']);
-    useEffect(() => {
-        setDefaultSelectedKeys(location.pathname.split('/'));
-    }, [location.pathname]);
-    return defaultSelectedKeys;
+const data = [
+    {
+        id: '1',
+        name: '目录1',
+        isLeaf: false,
+        parentId: '0',
+    },
+    {
+        id: '101',
+        name: '订单',
+        isLeaf: true,
+        tid: 'ttx.wso.bill',
+        oid: 'order',
+        parentId: '1',
+    },
+    {
+        id: '102',
+        name: '入库单',
+        isLeaf: true,
+        tid: 'ttx.wso.bill',
+        oid: 'receipt_header',
+        parentId: '1',
+    },
+    {
+        id: '201',
+        name: '组织',
+        isLeaf: true,
+        tid: 'ttx.wso.bill',
+        oid: 'organization',
+        parentId: '0',
+    },
+    {
+        id: '301',
+        name: '用户',
+        isLeaf: true,
+        tid: 'ttx.wso.bill',
+        oid: 'user',
+        parentId: '0',
+    },
+    {
+        id: '401',
+        name: '角色',
+        isLeaf: true,
+        tid: 'ttx.wso.bill2',
+        oid: 'rule',
+        parentId: '0',
+    },
+] as any;
+
+interface VMDynamicComponentProps {
+    navigation: any;
 }
 
-const apps = [
-    {
-        key: 'app0',
-        label: '基座',
-    },
-    {
-        key: 'app1',
-        label: 'React子应用',
-    },
-    {
-        key: 'app2',
-        label: 'app2',
-    },
-    {
-        key: 'app3',
-        label: 'Vite子应用',
-    },
-];
+export function VMDynamicComponent<T>(props: VMDynamicComponentProps) {
+    const app = useDusk();
+    const vm = useViewModel<T>(props.navigation.tid, props.navigation.oid);
+    const Actions = useActionJs(vm);
+    const actions = useCreation(() => {
+        const actions = {};
+        Actions.forEach(Action => {
+            actions[Action.name] = new Action(app, vm);
+        });
+        return actions;
+    }, [Actions, app]);
+    return !isEmpty(vm) ? (
+        <VMContext.Provider value={vm}>
+            <VMActionsContext.Provider value={actions}>
+                <DynamicComponent
+                    type={props.navigation.tid}
+                    props={{
+                        navigation: props.navigation,
+                        $app: app,
+                    }}
+                />
+            </VMActionsContext.Provider>
+        </VMContext.Provider>
+    ) : null;
+}
+
+export interface VMContextValue<T> {
+    vm: T;
+}
+
+export const VMContext = React.createContext<any>({
+    vm: {},
+});
+
+export function useVMContext<T = any>(): T {
+    return useContext(VMContext);
+}
+
+export interface VMActionsContextValue<T> {
+    actions: Record<string, any>;
+}
+
+export const VMActionsContext = React.createContext<any>({
+    actions: {},
+});
+
+export function useVMActionsContext() {
+    return useContext(VMActionsContext);
+}
+
+function useActionJs(vm: any): any[] {
+    return useMemo(() => {
+        const actionJs = vm.actionJs;
+        if (!actionJs) {
+            return [];
+        }
+
+        const rets: any[] = [];
+        actionJs.forEach(js => {
+            const module = require(`@/${js}`).default;
+            rets.push(module);
+        });
+        return rets;
+    }, [vm.actionJs]);
+}
