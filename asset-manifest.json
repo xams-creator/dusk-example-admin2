@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/dusk-example-admin2/static/css/main.9880e504.css",
-    "main.js": "/dusk-example-admin2/static/js/main.bdc9afbb.js",
+    "main.css": "/dusk-example-admin2/static/css/main.437f178a.css",
+    "main.js": "/dusk-example-admin2/static/js/main.3e55c0a4.js",
     "index.html": "/dusk-example-admin2/index.html"
   },
   "entrypoints": [
-    "static/css/main.9880e504.css",
-    "static/js/main.bdc9afbb.js"
+    "static/css/main.437f178a.css",
+    "static/js/main.3e55c0a4.js"
   ]
 }
